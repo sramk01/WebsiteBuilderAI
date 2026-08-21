@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ product_name }} official website. Learn about {{ product_name }} benefits, ingredients, pricing, reviews, and ordering.">
+  <link rel="canonical" href="{{ domain }}">
+  <meta property="og:title" content="{{ product_name }} Official Site">
+  <meta property="og:description" content="{{ product_name }} information, pricing, reviews, and official ordering details.">
+  <meta property="og:image" content="assets/images/{{ slug }}-og-image.webp">
+  <title>{{ product_name }} Official Site</title>
+  <link rel="shortcut icon" href="assets/images/{{ slug }}-favicon.webp" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand logo" href="index.html"><span class="dot"></span>{{ chrome.brand }}</a>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+          <li class="nav-item"><a class="nav-link navtext" href="#formula">{{ chrome.nav_1 }}</a></li>
+          <li class="nav-item"><a class="nav-link navtext" href="#reviews">{{ chrome.nav_2 }}</a></li>
+          <li class="nav-item"><a class="nav-link navtext" href="#pricing">{{ chrome.nav_3 }}</a></li>
+          <li class="nav-item"><a class="nav-link navtext" href="#faq">{{ chrome.nav_4 }}</a></li>
+          <li class="nav-item"><a href="{{ cta_href }}" class="btn btn-gold rounded-pill px-4">{{ chrome.cta }}</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="herobg text-white py-5">
+    <div class="container py-5">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <p class="eyebrow text-gold">Official {{ site_type }} site</p>
+          <h1 class="display-4 fw-bold">{{ custom.hero.title or product_name }}</h1>
+          <div class="lead mt-3">{{ custom.hero.body | safe }}</div>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <a href="{{ cta_href }}" class="btn btn-gold btn-lg rounded-pill px-5">{{ cta_label }}</a>
+            <a href="#formula" class="btn btn-outline-light btn-lg rounded-pill px-4">Learn More</a>
+          </div>
+          <div class="d-flex flex-wrap gap-2 mt-4">
+            <span class="badge bg-light text-dark rounded-pill px-3 py-2">60-Day Guarantee</span>
+            <span class="badge bg-light text-dark rounded-pill px-3 py-2">Natural Ingredients</span>
+            <span class="badge bg-light text-dark rounded-pill px-3 py-2">Secure Checkout</span>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="img-frame">
+            <img src="assets/images/{{ slug }}-hero.webp" alt="{{ product_name }} hero image" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stat-strip py-4">
+      <div class="container">
+        <div class="row text-center g-3">
+          <div class="col-6 col-md-3"><div class="stat-num">{{ rating.value }}</div><div>Average Rating</div></div>
+          <div class="col-6 col-md-3"><div class="stat-num">{{ rating.count }}+</div><div>Customer Reviews</div></div>
+          <div class="col-6 col-md-3"><div class="stat-num">60</div><div>Day Guarantee</div></div>
+          <div class="col-6 col-md-3"><div class="stat-num">100%</div><div>Secure Order</div></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="sectionband py-4" id="formula">
+    <div class="container"><h2 class="text-white text-center m-0">{{ custom.what_is.title or ('Inside The ' ~ product_name ~ ' Formula') }}</h2></div>
+  </section>
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5"><div class="img-frame"><img src="assets/images/{{ slug }}-product-main.webp" alt="{{ product_name }} bottle" class="img-fluid"></div></div>
+        <div class="col-lg-7">{{ custom.what_is.body | safe }}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectionband py-4">
+    <div class="container"><h2 class="text-white text-center m-0">{{ custom.benefits.title or ('Why Customers Choose ' ~ product_name) }}</h2></div>
+  </section>
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-8">{{ custom.benefits.body | safe }}</div>
+        <div class="col-lg-4">
+          <div class="card-soft p-4 h-100">
+            <img src="assets/images/{{ slug }}-certified.webp" alt="{{ product_name }} quality badges" class="img-fluid mb-3">
+            <h3 class="h4">Quality Focused</h3>
+            <p>Manufacturing, ingredient quality, and customer confidence are highlighted in this trust panel.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectionband py-4" id="reviews">
+    <div class="container"><h2 class="text-white text-center m-0">What Customers Are Saying About {{ product_name }}</h2></div>
+  </section>
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        {% for item in custom.testimonials['items'][:3] %}
+        <div class="col-md-4">
+          <div class="card-soft p-4 h-100 text-center">
+            <img src="assets/images/{{ slug }}-customer-review-{{ loop.index }}.webp" alt="{{ item.name or product_name ~ ' customer' }}" class="rounded-circle mb-3" style="width:92px;height:92px;object-fit:cover">
+            <h3 class="h5">{{ item.name or item.title or 'Verified Customer' }}</h3>
+            <p>{{ item.quote or item.text }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="sectionband py-4">
+    <div class="container"><h2 class="text-white text-center m-0">{{ custom.ingredients.title or ('Key Ingredients In ' ~ product_name) }}</h2></div>
+  </section>
+  <section class="py-5">
+    <div class="container">
+      {{ custom.ingredients.body | safe }}
+      <div class="row g-4 mt-2">
+        {% for item in custom.ingredients['items'][:5] %}
+        <div class="col-md-4 col-lg">
+          <div class="ing-card h-100">
+            <img src="assets/images/{{ slug }}-ingredient-{{ loop.index }}.webp" alt="{{ item.title }}">
+            <div class="body"><h3 class="h5">{{ item.title }}</h3><p>{{ item.text }}</p></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="sectionband py-4" id="pricing">
+    <div class="container"><h2 class="text-white text-center m-0">Unlock Your Exclusive Discount</h2></div>
+  </section>
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-md-4"><div class="card-soft p-4 h-100 text-center"><img src="assets/images/{{ slug }}-product-package-1.webp" class="img-fluid" alt=""><h3>Basic Offer</h3><p class="display-6">{{ currency_symbol }}{{ price.one_bottle }}</p><a class="btn btn-teal rounded-pill" href="{{ cta_href }}">{{ cta_label }}</a></div></div>
+        <div class="col-md-4"><div class="card-soft p-4 h-100 text-center border border-warning border-3"><img src="assets/images/{{ slug }}-product-package-3.webp" class="img-fluid" alt=""><h3>Best Value</h3><p class="display-6">{{ currency_symbol }}{{ price.six_bottle_each }}</p><a class="btn btn-gold rounded-pill" href="{{ cta_href }}">{{ cta_label }}</a></div></div>
+        <div class="col-md-4"><div class="card-soft p-4 h-100 text-center"><img src="assets/images/{{ slug }}-product-package-2.webp" class="img-fluid" alt=""><h3>Good Value</h3><p class="display-6">{{ currency_symbol }}{{ price.three_bottle_each }}</p><a class="btn btn-teal rounded-pill" href="{{ cta_href }}">{{ cta_label }}</a></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-4"><img src="assets/images/{{ slug }}-guarantee.webp" alt="{{ product_name }} guarantee" class="img-fluid"></div>
+        <div class="col-lg-8"><h2>{{ custom.guarantee.title or 'Money-Back Guarantee' }}</h2>{{ custom.guarantee.body | safe }}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectionband py-4" id="faq">
+    <div class="container"><h2 class="text-white text-center m-0">Frequently Asked Questions About {{ product_name }}</h2></div>
+  </section>
+  <section class="py-5">
+    <div class="container">
+      {% for item in custom.faq['items'] %}
+      <div class="card-soft p-4 mb-3">
+        <h3 class="h5">{{ item.q or item.question or item.title }}</h3>
+        <p class="mb-0">{{ item.a or item.answer or item.text }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <footer class="sectionband text-white py-5">
+    <div class="container text-center">
+      <h2>{{ chrome.footer_title }}</h2>
+      <div>{{ custom.conclusion.body | safe }}</div>
+      <p class="mt-4 mb-0">{{ chrome.footer_copyright }}</p>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "site_type": "business",
+  "product_name": "Northstar Growth Partners",
+  "category": "Digital Marketing Agency",
+  "official_website": "https://example.com/northstar",
+  "affiliate_link": "https://example.com/northstar/contact",
+  "primary_keyword": "digital marketing agency",
+  "secondary_keywords": [
+    "SEO agency for small business",
+    "paid ads management agency",
+    "marketing agency near me"
+  ],
+  "brand_colors": {
+    "primary": "#C1440E",
+    "secondary": "#1F1F1F",
+    "dark": "#2B1B12",
+    "light": "#FBF3EE"
+  },
+  "domain": "https://www.your-domain-here.com",
+  "business_name": "Northstar Growth Partners",
+  "contact_email": "hello@your-domain-here.com",
+  "price": {
+    "one_bottle": "1500",
+    "three_bottle_each": "3000",
+    "six_bottle_each": "6000",
+    "currency": "USD"
+  },  
+  "rating": {
+    "value": "4.9",
+    "count": "180"
+  }
+}

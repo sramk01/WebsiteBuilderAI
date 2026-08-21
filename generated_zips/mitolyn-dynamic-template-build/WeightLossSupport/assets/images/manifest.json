@@ -1,0 +1,173 @@
+[
+  {
+    "filename": "mitolyn-favicon.webp",
+    "size": "512x512",
+    "width": 512,
+    "height": 512,
+    "alt": "Mitolyn Logo favicon",
+    "title": "Mitolyn Logo favicon",
+    "prompt": "Replacement image for Mitolyn logo favicon"
+  },
+  {
+    "filename": "mitolyn-og-image.webp",
+    "size": "1200x630",
+    "width": 1200,
+    "height": 630,
+    "alt": "Mitolyn Social share image",
+    "title": "Mitolyn Social share image",
+    "prompt": "Replacement image for Mitolyn social share image"
+  },
+  {
+    "filename": "mitolyn-twitter-image.webp",
+    "size": "1200x600",
+    "width": 1200,
+    "height": 600,
+    "alt": "Mitolyn Twitter/X share image",
+    "title": "Mitolyn Twitter/X share image",
+    "prompt": "Replacement image for Mitolyn twitter/x share image"
+  },
+  {
+    "filename": "mitolyn-hero.webp",
+    "size": "400x320",
+    "width": 400,
+    "height": 320,
+    "alt": "Mitolyn Hero product image",
+    "title": "Mitolyn Hero product image",
+    "prompt": "Replacement image for Mitolyn hero product image"
+  },
+  {
+    "filename": "mitolyn-product-main.webp",
+    "size": "520x375",
+    "width": 520,
+    "height": 375,
+    "alt": "Mitolyn Main product image",
+    "title": "Mitolyn Main product image",
+    "prompt": "Replacement image for Mitolyn main product image"
+  },
+  {
+    "filename": "mitolyn-product-package-1.webp",
+    "size": "520x375",
+    "width": 520,
+    "height": 375,
+    "alt": "Mitolyn Two pouch package",
+    "title": "Mitolyn Two pouch package",
+    "prompt": "Replacement image for Mitolyn two pouch package"
+  },
+  {
+    "filename": "mitolyn-product-package-2.webp",
+    "size": "400x320",
+    "width": 400,
+    "height": 320,
+    "alt": "Mitolyn Three pouch package",
+    "title": "Mitolyn Three pouch package",
+    "prompt": "Replacement image for Mitolyn three pouch package"
+  },
+  {
+    "filename": "mitolyn-product-package-3.webp",
+    "size": "520x320",
+    "width": 520,
+    "height": 320,
+    "alt": "Mitolyn Six pouch package",
+    "title": "Mitolyn Six pouch package",
+    "prompt": "Replacement image for Mitolyn six pouch package"
+  },
+  {
+    "filename": "mitolyn-pricing.webp",
+    "size": "1037x916",
+    "width": 1037,
+    "height": 916,
+    "alt": "Mitolyn Pricing package image",
+    "title": "Mitolyn Pricing package image",
+    "prompt": "Replacement image for Mitolyn pricing package image"
+  },
+  {
+    "filename": "mitolyn-customer-review-1.webp",
+    "size": "125x145",
+    "width": 125,
+    "height": 145,
+    "alt": "Mitolyn Customer review photo",
+    "title": "Mitolyn Customer review photo",
+    "prompt": "Replacement image for Mitolyn customer review photo"
+  },
+  {
+    "filename": "mitolyn-customer-review-2.webp",
+    "size": "125x125",
+    "width": 125,
+    "height": 125,
+    "alt": "Mitolyn Customer review photo",
+    "title": "Mitolyn Customer review photo",
+    "prompt": "Replacement image for Mitolyn customer review photo"
+  },
+  {
+    "filename": "mitolyn-customer-review-3.webp",
+    "size": "125x125",
+    "width": 125,
+    "height": 125,
+    "alt": "Mitolyn Customer review photo",
+    "title": "Mitolyn Customer review photo",
+    "prompt": "Replacement image for Mitolyn customer review photo"
+  },
+  {
+    "filename": "mitolyn-guarantee.webp",
+    "size": "474x313",
+    "width": 474,
+    "height": 313,
+    "alt": "Mitolyn Money-back guarantee badge",
+    "title": "Mitolyn Money-back guarantee badge",
+    "prompt": "Replacement image for Mitolyn money-back guarantee badge"
+  },
+  {
+    "filename": "mitolyn-certified.webp",
+    "size": "1761x297",
+    "width": 1761,
+    "height": 297,
+    "alt": "Mitolyn Certification badges",
+    "title": "Mitolyn Certification badges",
+    "prompt": "Replacement image for Mitolyn certification badges"
+  },
+  {
+    "filename": "mitolyn-free-shipping.webp",
+    "size": "592x591",
+    "width": 592,
+    "height": 591,
+    "alt": "Mitolyn Free shipping image",
+    "title": "Mitolyn Free shipping image",
+    "prompt": "Replacement image for Mitolyn free shipping image"
+  },
+  {
+    "filename": "mitolyn-checkout-page.webp",
+    "size": "909x1759",
+    "width": 909,
+    "height": 1759,
+    "alt": "Mitolyn Checkout page preview",
+    "title": "Mitolyn Checkout page preview",
+    "prompt": "Replacement image for Mitolyn checkout page preview"
+  },
+  {
+    "filename": "mitolyn-bonus-1.webp",
+    "size": "509x291",
+    "width": 509,
+    "height": 291,
+    "alt": "Mitolyn Bonus image",
+    "title": "Mitolyn Bonus image",
+    "prompt": "Replacement image for Mitolyn bonus image"
+  },
+  {
+    "filename": "mitolyn-bonus-2.webp",
+    "size": "400x514",
+    "width": 400,
+    "height": 514,
+    "alt": "Mitolyn Bonus image",
+    "title": "Mitolyn Bonus image",
+    "prompt": "Replacement image for Mitolyn bonus image"
+  },
+  {
+    "filename": "mitolyn-bonus-3.webp",
+    "size": "509x500",
+    "width": 509,
+    "height": 500,
+    "alt": "Mitolyn Bonus image",
+    "title": "Mitolyn Bonus image",
+    "prompt": "Replacement image for Mitolyn bonus image"
+  }
+]

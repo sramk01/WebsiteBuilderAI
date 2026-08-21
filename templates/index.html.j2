@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ meta.title }}</title>
+<meta name="description" content="{{ meta.description }}">
+<meta name="keywords" content="{{ meta.keywords }}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ meta.canonical }}">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ meta.title }}">
+<meta property="og:description" content="{{ meta.description }}">
+<meta property="og:url" content="{{ meta.og_url }}">
+<meta property="og:image" content="{{ meta.domain }}/assets/images/{{ slug }}-og-image.webp">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta.title }}">
+<meta name="twitter:description" content="{{ meta.description }}">
+<meta name="twitter:image" content="{{ meta.domain }}/assets/images/{{ slug }}-twitter-image.webp">
+
+<link rel="icon" href="assets/images/{{ slug }}-favicon.webp" type="image/webp">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+
+<script type="application/ld+json">{{ schema.organization | safe }}</script>
+<script type="application/ld+json">{{ schema.website | safe }}</script>
+<script type="application/ld+json">{{ schema.product | safe }}</script>
+<script type="application/ld+json">{{ schema.faq | safe }}</script>
+<script type="application/ld+json">{{ schema.breadcrumb | safe }}</script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="#hero">
+      <span class="navbar-logo">{{ product_name[0] | upper }}</span>{{ product_name }}
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+        {% for s in sections if s.get('show_in_nav') %}
+        <li class="nav-item"><a class="nav-link" href="#{{ s.id }}">{{ s.nav_label or s.title }}</a></li>
+        {% endfor %}
+        <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+          <a class="btn btn-primary btn-sm nav-cta" href="{{ cta_href }}" rel="nofollow sponsored">{{ cta_label }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% for s in sections %}
+{% set theme_class = 'section-alt' if s.theme == 'alt' else ('section-brand' if s.theme == 'brand' else '') %}
+
+{% if s.layout == 'hero' %}
+<header class="hero-section" id="{{ s.id }}">
+  <div class="container py-4">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        {% if s.eyebrow %}<span class="section-eyebrow">{{ s.eyebrow }}</span>{% endif %}
+        <h1 class="gradient-text">{{ s.title }}</h1>
+        <div class="hero-lead mt-3">{{ s.body | safe }}</div>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a href="{{ s.cta.href }}" class="btn btn-lg btn-primary" rel="nofollow sponsored">{{ s.cta.label }}</a>
+        </div>
+        {% if s.trust_badges %}
+        <div class="trust-badges">
+          {% if s.badge_image %}
+          <img src="assets/images/{{ slug }}-{{ s.badge_image.suffix }}.webp" width="{{ s.badge_image.w }}" height="{{ s.badge_image.h }}"
+               alt="{{ s.badge_image.alt }}" title="{{ s.badge_image.alt }}" class="trust-badge-img" loading="lazy">
+          {% endif %}
+          {% for badge in s.trust_badges %}
+          <span><i class="bi bi-check-circle-fill"></i>{{ badge }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-image-wrap">
+          <img src="assets/images/{{ slug }}-{{ s.image.suffix }}.webp" class="img-fluid" width="{{ s.image.w }}" height="{{ s.image.h }}"
+               alt="{{ s.image.alt }}" title="{{ s.image.alt }}" loading="eager">
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% elif s.layout == 'text' %}
+<section class="{{ theme_class }}" id="{{ s.id }}">
+  <div class="container">
+    <div class="section-head reveal {% if s.align_left %}align-left{% endif %} {% if s.full_width %}full-width{% endif %}">
+      {% if s.eyebrow %}<span class="section-eyebrow">{{ s.eyebrow }}</span>{% endif %}
+      {% if s.title %}<h2>{{ s.title }}</h2>{% endif %}
+      {% if s.columns %}<div class="narrative-columns">{{ s.body | safe }}</div>{% else %}{{ s.body | safe }}{% endif %}
+      {% if s.bullets %}
+      <ul class="section-bullets {% if s.align_left %}justify-content-start{% endif %}">
+        {% for b in s.bullets %}<li><i class="bi bi-check-circle-fill"></i>{{ b }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+      {% if s.cta %}
+      <div class="mt-3">
+        <a href="{{ s.cta.href }}" class="btn btn-primary" rel="nofollow sponsored">{{ s.cta.label }}</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% elif s.layout == 'pros_cons' %}
+<section class="{{ theme_class }}" id="{{ s.id }}">
+  <div class="container">
+    <div class="section-head reveal">
+      {% if s.eyebrow %}<span class="section-eyebrow">{{ s.eyebrow }}</span>{% endif %}
+      <h2>{{ s.title }}</h2>
+      {% if s.body %}{{ s.body | safe }}{% endif %}
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-6 col-lg-5 reveal">
+        <div class="pros-cons-card pros">
+          <h3><i class="bi bi-check-circle-fill"></i> Pros</h3>
+          <ul>
+            {% for p in s.pros %}<li><i class="bi bi-plus-circle-fill"></i>{{ p }}</li>{% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-5 reveal">
+        <div class="pros-cons-card cons">
+          <h3><i class="bi bi-dash-circle-fill"></i> Cons</h3>
+          <ul>
+            {% for c in s.cons %}<li><i class="bi bi-dash-circle-fill"></i>{{ c }}</li>{% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% elif s.layout == 'split' %}
+<section class="{{ theme_class }}" id="{{ s.id }}">
+  <div class="container">
+    <div class="row align-items-center g-5 {% if s.reverse %}flex-lg-row-reverse{% endif %}">
+      <div class="col-lg-6 reveal">
+        {% if s.eyebrow %}<span class="section-eyebrow">{{ s.eyebrow }}</span>{% endif %}
+        <h2>{{ s.title }}</h2>
+        {{ s.body | safe }}
+      </div>
+      <div class="col-lg-6 split-image reveal">
+        <img src="assets/images/{{ slug }}-{{ s.image.suffix }}.webp" width="{{ s.image.w }}" height="{{ s.image.h }}"
+             alt="{{ s.image.alt }}" title="{{ s.image.alt }}" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+{% elif s.layout == 'steps' %}
+<section class="{{ theme_class }}" id="{{ s.id }}">
+  <div class="container">
+    <div class="section-head reveal">
+      {% if s.eyebrow %}<span class="section-eyebrow">{{ s.eyebrow }}</span>{% endif %}
+      <h2>{{ s.title }}</h2>
+      {% if s.body %}{{ s.body | safe }}{% endif %}
+      {% if s.bullets %}
+      <ul class="section-bullets">
+        {% for b in s.bullets %}<li><i class="bi bi-check-circle-fill"></i>{{ b }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    <div class="row g-4">
+      {% for item in s['items'] %}
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="step-card">
+          <div class="step-number">{{ item.number }}</div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% elif s.layout == 'grid' %}
+<section class="{{ theme_class }}" id="{{ s.id }}">
+  <div class="container">
+    <div class="section-head reveal">
+      {% if s.eyebrow %}<span class="section-eyebrow">{{ s.eyebrow }}</span>{% endif %}
+      <h2>{{ s.title }}</h2>
+      {% if s.body %}{{ s.body | safe }}{% endif %}
+      {% if s.bullets %}
+      <ul class="section-bullets">
+        {% for b in s.bullets %}<li><i class="bi bi-check-circle-fill"></i>{{ b }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    <div class="row g-4">
+      {% for item in s['items'] %}
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi {{ item.icon }}"></i></div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
+          {% if item.image %}
+          <img src="assets/images/{{ slug }}-{{ item.image.suffix }}.webp" width="{{ item.image.w }}" height="{{ item.image.h }}"
+               alt="{{ item.image.alt }}" title="{{ item.image.alt }}" loading="lazy">
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% elif s.layout == 'guarantee' %}
+<section class="{{ theme_class }}" id="{{ s.id }}">
+  <div class="container reveal">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-4 text-center text-lg-start">
+        <img src="assets/images/{{ slug }}-{{ s.image.suffix }}.webp" width="{{ s.image.w }}" height="{{ s.image.h }}"
+             alt="{{ s.image.alt }}" title="{{ s.image.alt }}" loading="lazy" class="guarantee-badge">
+      </div>
+      <div class="col-lg-8 text-center text-lg-start">
+        <h2>{{ s.title }}</h2>
+        <div>{{ s.body | safe }}</div>
+        {% if s.bullets %}
+        <ul class="section-bullets justify-content-center justify-content-lg-start">
+          {% for b in s.bullets %}<li><i class="bi bi-check-circle-fill"></i>{{ b }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% elif s.layout == 'urgency' %}
+<section class="{{ theme_class }} urgency-section" id="{{ s.id }}">
+  <div class="container reveal">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-3 text-center">
+        <img src="assets/images/{{ slug }}-{{ s.image.suffix }}.webp" width="{{ s.image.w }}" height="{{ s.image.h }}"
+             alt="{{ s.image.alt }}" title="{{ s.image.alt }}" loading="lazy" class="urgency-badge">
+      </div>
+      <div class="col-lg-6 text-center text-lg-start">
+        <span class="urgency-pill"><i class="bi bi-alarm"></i> Limited Time</span>
+        <h2>{{ s.title }}</h2>
+        {{ s.body | safe }}
+      </div>
+      <div class="col-lg-3 text-center">
+        <a href="{{ s.cta.href }}" class="btn btn-lg btn-primary" rel="nofollow sponsored">{{ s.cta.label }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% elif s.layout == 'stats' %}
+<section class="{{ theme_class }}" id="{{ s.id }}">
+  <div class="container">
+    {% if s.title %}
+    <div class="section-head reveal">
+      {% if s.eyebrow %}<span class="section-eyebrow">{{ s.eyebrow }}</span>{% endif %}
+      <h2>{{ s.title }}</h2>
+    </div>
+    {% endif %}
+    <div class="row">
+      {% for item in s['items'] %}
+      <div class="col-6 col-lg-3 stat-item reveal">
+        <div class="stat-number">{{ item.number }}</div>
+        <div class="stat-label">{{ item.label }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% elif s.layout == 'testimonials' %}
+<section class="{{ theme_class }}" id="{{ s.id }}">
+  <div class="container">
+    <div class="section-head reveal">
+      {% if s.eyebrow %}<span class="section-eyebrow">{{ s.eyebrow }}</span>{% endif %}
+      <h2>{{ s.title }}</h2>
+      {% if s.body %}{{ s.body | safe }}{% endif %}
+    </div>
+    <div class="row g-4">
+      {% for item in s['items'] %}
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="testimonial-card h-100">
+          <div class="stars">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p class="testimonial-quote">&ldquo;{{ item.quote }}&rdquo;</p>
+          <div class="d-flex align-items-center gap-3">
+            <img src="assets/images/{{ slug }}-{{ item.avatar.suffix }}.webp" width="{{ item.avatar.w }}" height="{{ item.avatar.h }}"
+                 alt="{{ item.avatar.alt }}" title="{{ item.avatar.alt }}" loading="lazy" class="testimonial-avatar">
+            <div>
+              <div class="fw-bold">{{ item.name }}</div>
+              <div class="text-muted small">{{ item.role }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% elif s.layout == 'team' %}
+<section class="{{ theme_class }}" id="{{ s.id }}">
+  <div class="container">
+    <div class="section-head reveal">
+      {% if s.eyebrow %}<span class="section-eyebrow">{{ s.eyebrow }}</span>{% endif %}
+      <h2>{{ s.title }}</h2>
+    </div>
+    <div class="row g-4 justify-content-center">
+      {% for item in s['items'] %}
+      <div class="col-md-4 team-card reveal">
+        <img src="assets/images/{{ slug }}-{{ item.photo.suffix }}.webp" width="{{ item.photo.w }}" height="{{ item.photo.h }}"
+             alt="{{ item.photo.alt }}" title="{{ item.photo.alt }}" loading="lazy">
+        <h3>{{ item.name }}</h3>
+        <p class="text-muted mb-2">{{ item.role }}</p>
+        <p>{{ item.bio }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% elif s.layout == 'pricing' %}
+<section class="{{ theme_class }}" id="{{ s.id }}">
+  <div class="container">
+    <div class="section-head reveal">
+      {% if s.eyebrow %}<span class="section-eyebrow">{{ s.eyebrow }}</span>{% endif %}
+      <h2>{{ s.title }}</h2>
+      {% if s.body %}{{ s.body | safe }}{% endif %}
+    </div>
+    <div class="row g-4">
+      {% for item in s['items'] %}
+      <div class="col-lg-4 reveal">
+        <div class="pricing-card {% if item.highlighted %}highlighted{% endif %}">
+          {% if item.highlighted %}<span class="badge-pop">Most Popular</span>{% endif %}
+          {% if item.image %}
+          <img src="assets/images/{{ slug }}-{{ item.image.suffix }}.webp" width="{{ item.image.w }}" height="{{ item.image.h }}"
+               alt="{{ item.image.alt }}" title="{{ item.image.alt }}" loading="lazy" class="mb-3">
+          {% endif %}
+          <h3>{{ item.name }}</h3>
+          <div class="price-value">${{ item.price }}</div>
+          <div class="price-period">{{ item.period }}</div>
+          <ul class="pricing-features">
+            {% for f in item.features %}
+            <li><i class="bi bi-check-circle-fill"></i><span>{{ f }}</span></li>
+            {% endfor %}
+          </ul>
+          <a href="{{ cta_href }}" class="btn {% if item.highlighted %}btn-primary{% else %}btn-outline-primary{% endif %} w-100" rel="nofollow sponsored">{{ item.cta_label }}</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% elif s.layout == 'faq' %}
+<section class="{{ theme_class }}" id="{{ s.id }}">
+  <div class="container">
+    <div class="section-head reveal">
+      {% if s.eyebrow %}<span class="section-eyebrow">{{ s.eyebrow }}</span>{% endif %}
+      <h2>{{ s.title }}</h2>
+    </div>
+    <div class="accordion mx-auto reveal" style="max-width:800px" id="faqAccordion">
+      {% for q, a in faqs %}
+      <div class="accordion-item">
+        <h3 class="accordion-header" style="font-size:1rem">
+          <button class="accordion-button {% if not loop.first %}collapsed{% endif %}" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#c{{ loop.index }}">
+            {{ q }}
+          </button>
+        </h3>
+        <div id="c{{ loop.index }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}"
+             data-bs-parent="#faqAccordion">
+          <div class="accordion-body">{{ a }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% elif s.layout == 'cta' %}
+<section class="{{ theme_class }} cta-section" id="{{ s.id }}">
+  <div class="container reveal">
+    <h2>{{ s.title }}</h2>
+    {{ s.body | safe }}
+    <a href="{{ s.cta.href }}" class="btn btn-lg btn-light mt-2" rel="nofollow sponsored">{{ s.cta.label }}</a>
+  </div>
+</section>
+{% endif %}
+{% endfor %}
+
+<footer class="py-4 bg-dark text-white-50 text-center small">
+  <div class="container">
+    <p class="fw-bold text-white mb-2">{{ product_name }}</p>
+    <p>&copy; {{ year }} {{ business_name }}. All rights reserved.</p>
+    <p>
+      <a href="privacy-policy.html" class="text-white-50">Privacy Policy</a> ·
+      <a href="disclaimer.html" class="text-white-50">Disclaimer</a> ·
+      {% if site_type in ('supplement', 'product', 'betting') %}
+      <a href="affiliate-disclosure.html" class="text-white-50">Affiliate Disclosure</a> ·
+      {% endif %}
+      {% if site_type == 'supplement' %}
+      <a href="medical-disclaimer.html" class="text-white-50">Medical Disclaimer</a> ·
+      {% endif %}
+      {% if site_type == 'betting' %}
+      <a href="responsible-gambling.html" class="text-white-50">Responsible Gambling</a> ·
+      {% endif %}
+      <a href="terms-and-conditions.html" class="text-white-50">Terms</a> ·
+      <a href="shipping-policy.html" class="text-white-50">Shipping</a> ·
+      <a href="refund-policy.html" class="text-white-50">Refunds</a> ·
+      <a href="contact.html" class="text-white-50">Contact</a>
+    </p>
+    {% if site_type == 'supplement' %}
+    <p>This statement has not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary.</p>
+    {% endif %}
+    {% if site_type == 'betting' %}
+    <p>18+ (or the minimum legal age in your jurisdiction). Please gamble responsibly. If you or someone you know has a gambling problem, call 1-800-522-4700 (US) for free, confidential help.</p>
+    {% endif %}
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/script.js"></script>
+</body>
+</html>

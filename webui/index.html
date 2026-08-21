@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landing Page Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="wizard.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <span class="navbar-brand"><i class="bi bi-magic"></i> Landing Page Generator</span>
+  </div>
+</nav>
+
+<div class="container py-4 py-md-5">
+
+  <div class="progress-track mb-4">
+    <div class="progress-bar-fill" id="progressFill"></div>
+  </div>
+  <div class="step-counter mb-4" id="stepCounter">Step 1 of 18</div>
+
+  <form id="wizardForm">
+  <div class="wizard-card">
+
+    <!-- Step 1: Site Type -->
+    <div class="step" data-step="1">
+      <h2>What kind of landing page do you want to build?</h2>
+      <p class="text-muted">Pick the type that best matches your project.</p>
+      <div class="type-grid">
+        <label class="type-card">
+          <input type="radio" name="site_type" value="supplement" checked>
+          <div><i class="bi bi-capsule"></i><h3>Supplement</h3><p>Health / supplement product</p></div>
+        </label>
+        <label class="type-card">
+          <input type="radio" name="site_type" value="education">
+          <div><i class="bi bi-mortarboard"></i><h3>Education</h3><p>Online course / academy</p></div>
+        </label>
+        <label class="type-card">
+          <input type="radio" name="site_type" value="business">
+          <div><i class="bi bi-briefcase"></i><h3>Business</h3><p>Agency / professional services</p></div>
+        </label>
+        <label class="type-card">
+          <input type="radio" name="site_type" value="product">
+          <div><i class="bi bi-box-seam"></i><h3>Product</h3><p>SaaS / general product</p></div>
+        </label>
+        <label class="type-card">
+          <input type="radio" name="site_type" value="betting">
+          <div><i class="bi bi-dice-5"></i><h3>Betting / Gaming</h3><p>Sportsbook, casino, or gaming platform</p></div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 2: Name -->
+    <div class="step" data-step="2">
+      <h2 id="nameLabel">Product / Course / Business name</h2>
+      <p class="text-muted">This appears in the hero, nav, and page titles.</p>
+      <input type="text" class="form-control form-control-lg" name="product_name" required placeholder="e.g. VitaJoint Pro">
+    </div>
+
+    <!-- Step 3: Category -->
+    <div class="step" data-step="3">
+      <h2>Category</h2>
+      <p class="text-muted">e.g. "Joint Support", "Data Analytics", "Digital Marketing", "Project Management Software".</p>
+      <input type="text" class="form-control form-control-lg" name="category" required placeholder="e.g. Joint Support">
+    </div>
+
+    <!-- Step 4: URL -->
+    <div class="step" data-step="4">
+      <h2 id="urlLabel">Official website / checkout URL</h2>
+      <p class="text-muted" id="urlHelp">Where should the main "Buy Now" button link?</p>
+      <input type="url" class="form-control form-control-lg" name="official_website" required placeholder="https://example.com/checkout">
+    </div>
+
+    <!-- Step 5: Primary keyword -->
+    <div class="step" data-step="5">
+      <h2>Primary SEO keyword</h2>
+      <p class="text-muted">The main phrase you want to rank for.</p>
+      <input type="text" class="form-control form-control-lg" name="primary_keyword" required placeholder="e.g. joint support supplement">
+    </div>
+
+    <!-- Step 6: Secondary keywords -->
+    <div class="step" data-step="6">
+      <h2>Secondary SEO keywords</h2>
+      <p class="text-muted">Comma-separated. Used in meta keywords and section copy.</p>
+      <input type="text" class="form-control form-control-lg" name="secondary_keywords" placeholder="e.g. natural joint pain relief, cartilage support">
+    </div>
+
+    <!-- Step 7: Domain -->
+    <div class="step" data-step="7">
+      <h2>Your domain</h2>
+      <p class="text-muted">Used for canonical URLs, sitemap.xml, robots.txt, llms.txt, Open Graph.</p>
+      <input type="url" class="form-control form-control-lg" name="domain" required placeholder="https://www.yourdomain.com">
+    </div>
+
+    <!-- Step 8: Business/brand name -->
+    <div class="step" data-step="8">
+      <h2>Business / brand name</h2>
+      <p class="text-muted">Shown in the footer copyright and schema markup. Leave blank to reuse the name from step 2.</p>
+      <input type="text" class="form-control form-control-lg" name="business_name" placeholder="Defaults to your product/course/business name">
+    </div>
+
+    <!-- Step 9: Contact email -->
+    <div class="step" data-step="9">
+      <h2>Contact email</h2>
+      <input type="email" class="form-control form-control-lg" name="contact_email" required placeholder="support@yourdomain.com">
+    </div>
+
+
+    <!-- Step 10: Template choice -->
+    <div class="step" data-step="10">
+      <h2>Choose template</h2>
+      <p class="text-muted">Pick a design style for this site. Default keeps the current generator layout.</p>
+      <div class="template-grid" id="templateGrid">
+        <label class="template-card active">
+          <input type="radio" name="template_id" value="default" checked>
+          <div>
+            <h3>Default Generator</h3>
+            <p>Flexible section-based layout.</p>
+          </div>
+        </label>
+      </div>
+      <p class="text-muted small mt-3" id="templateHelp">Custom templates appear only for compatible site types.</p>
+      <div class="template-preview-modal d-none" id="templatePreviewModal">
+        <div class="template-preview-dialog">
+          <div class="template-preview-head">
+            <strong id="templatePreviewTitle">Template preview</strong>
+            <button type="button" id="closeTemplatePreview"><i class="bi bi-x-lg"></i></button>
+          </div>
+          <div class="theme-preview preview-desktop template-preview-body" id="templatePreviewBody"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 11: Branding & pricing -->
+    <div class="step" data-step="11">
+      <h2>Branding &amp; pricing</h2>
+      <p class="text-muted">Brand colors and your 3 pricing tiers.</p>
+
+      <label class="form-label small fw-bold">Quick palettes</label>
+      <div class="palette-grid mb-3" id="paletteGrid">
+        <!-- populated by JS -->
+      </div>
+
+      <div class="row g-3 mb-3">
+        <div class="col-6 col-md-3">
+          <label class="form-label small">Primary</label>
+          <input type="color" class="form-control form-control-color w-100" name="color_primary" id="colorPrimary" value="#1F6F54">
+        </div>
+        <div class="col-6 col-md-3">
+          <label class="form-label small">Secondary</label>
+          <input type="color" class="form-control form-control-color w-100" name="color_secondary" id="colorSecondary" value="#F4A63E">
+        </div>
+        <div class="col-6 col-md-3">
+          <label class="form-label small">Dark</label>
+          <input type="color" class="form-control form-control-color w-100" name="color_dark" id="colorDark" value="#123328">
+        </div>
+        <div class="col-6 col-md-3">
+          <label class="form-label small">Light</label>
+          <input type="color" class="form-control form-control-color w-100" name="color_light" id="colorLight" value="#FBF7EE">
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-4">
+          <label class="form-label small">Tier 1 price</label>
+          <input type="number" class="form-control" name="price_low" value="49">
+        </div>
+        <div class="col-4">
+          <label class="form-label small">Tier 2 price</label>
+          <input type="number" class="form-control" name="price_mid" value="99">
+        </div>
+        <div class="col-4">
+          <label class="form-label small">Tier 3 price</label>
+          <input type="number" class="form-control" name="price_high" value="199">
+        </div>
+      </div>
+      <div class="row g-3 mt-1">
+        <div class="col-4">
+          <label class="form-label small">Tier 1 label <span class="text-muted">(optional)</span></label>
+          <input type="text" class="form-control form-control-sm" name="tier_label_1" placeholder="e.g. 2 Bottles">
+        </div>
+        <div class="col-4">
+          <label class="form-label small">Tier 2 label <span class="text-muted">(optional)</span></label>
+          <input type="text" class="form-control form-control-sm" name="tier_label_2" placeholder="e.g. 3 Bottles">
+        </div>
+        <div class="col-4">
+          <label class="form-label small">Tier 3 label <span class="text-muted">(optional)</span></label>
+          <input type="text" class="form-control form-control-sm" name="tier_label_3" placeholder="e.g. 6 Bottles">
+        </div>
+      </div>
+      <p class="text-muted small mt-1">
+        Leave blank to use the defaults for your site type (e.g. "1 Bottle / 3 Bottles / 6 Bottles").
+        Set these if your actual bundle sizes are different — like 2/3/6 — so the label matches
+        whatever photo you upload for that tier in Step 12.
+      </p>
+    </div>
+
+    <!-- Step 12: Images -->
+    <!-- (content step continues below) -->
+    <div class="step" data-step="12">
+      <h2>Images</h2>
+      <p class="text-muted">All optional — anything left blank gets a styled placeholder you can swap later.</p>
+
+      <div class="image-group bg-removal-banner">
+        <p class="fw-bold mb-1"><i class="bi bi-shield-check"></i> Your photos are used exactly as uploaded</p>
+        <p class="text-muted small mb-0">
+          No background removal, no color changes, no other editing of any kind. The only
+          thing ever applied is resizing to fit each section's layout — whatever background
+          your photo has (white, black, transparent, anything) stays exactly as you provided
+          it. Anything left blank gets a plain white placeholder instead.
+        </p>
+      </div>
+
+      <div class="image-group">
+        <h4><i class="bi bi-badge-ad"></i> Branding &amp; social sharing</h4>
+        <div class="row g-2">
+          <div class="col-6 col-md-3"><label class="form-label small">Favicon</label><input type="file" class="form-control form-control-sm" name="image_favicon" accept="image/*"></div>
+          <div class="col-6 col-md-3"><label class="form-label small">og:image</label><input type="file" class="form-control form-control-sm" name="image_og-image" accept="image/*"></div>
+          <div class="col-6 col-md-3"><label class="form-label small">twitter:image</label><input type="file" class="form-control form-control-sm" name="image_twitter-image" accept="image/*"></div>
+          <div class="col-6 col-md-3"><label class="form-label small">Certified / trust badge</label><input type="file" class="form-control form-control-sm" name="image_certified" accept="image/*"></div>
+        </div>
+      </div>
+
+      <div class="image-group">
+        <h4><i class="bi bi-image"></i> Hero &amp; main image</h4>
+        <div class="row g-2">
+          <div class="col-6">
+            <label class="form-label small">Hero / banner image</label>
+            <input type="file" class="form-control form-control-sm" name="image_hero" accept="image/*">
+          </div>
+          <div class="col-6">
+            <label class="form-label small">Main / "What Is" image</label>
+            <input type="file" class="form-control form-control-sm" name="image_product-main" accept="image/*">
+          </div>
+        </div>
+      </div>
+
+      <div class="image-group">
+        <h4><i class="bi bi-people"></i> Customer photos</h4>
+        <div class="row g-2">
+          <div class="col-4"><input type="file" class="form-control form-control-sm" name="image_customer-review-1" accept="image/*"></div>
+          <div class="col-4"><input type="file" class="form-control form-control-sm" name="image_customer-review-2" accept="image/*"></div>
+          <div class="col-4"><input type="file" class="form-control form-control-sm" name="image_customer-review-3" accept="image/*"></div>
+        </div>
+        <p class="text-muted small mt-1">Matches the 3-column testimonial layout. If you add more than 3 testimonials in the next step, extras get a styled placeholder photo.</p>
+      </div>
+
+      <div class="image-group">
+        <h4><i class="bi bi-tags"></i> Pricing tier images</h4>
+        <div class="row g-2">
+          <div class="col-4"><input type="file" class="form-control form-control-sm" name="image_product-1-bottle" accept="image/*"></div>
+          <div class="col-4"><input type="file" class="form-control form-control-sm" name="image_product-3-bottles" accept="image/*"></div>
+          <div class="col-4"><input type="file" class="form-control form-control-sm" name="image_product-6-bottles" accept="image/*"></div>
+          <div class="col-12"><label class="form-label small mt-1">Template pricing composite image</label><input type="file" class="form-control form-control-sm" name="image_pricing" accept="image/*"></div>
+        </div>
+      </div>
+
+      <div class="image-group">
+        <h4><i class="bi bi-shield-check"></i> Guarantee &amp; urgency</h4>
+        <div class="row g-2">
+          <div class="col-6"><label class="form-label small">Money-back guarantee badge</label><input type="file" class="form-control form-control-sm" name="image_guarantee" accept="image/*"></div>
+          <div class="col-6"><label class="form-label small">Discount badge</label><input type="file" class="form-control form-control-sm" name="image_discount" accept="image/*"></div>
+          <div class="col-6"><label class="form-label small">Free shipping image</label><input type="file" class="form-control form-control-sm" name="image_free-shipping" accept="image/*"></div>
+          <div class="col-6"><label class="form-label small">Checkout preview image</label><input type="file" class="form-control form-control-sm" name="image_checkout-page" accept="image/*"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 13: Real ingredient content (supplement only) -->
+    <div class="step" data-step="13" id="ingredientsContentStep">
+      <h2>Ingredient details <span class="text-muted fw-normal">(supplement only)</span></h2>
+      <p class="text-muted">
+        Enter your actual ingredients, their real factual role, and (optionally) a
+        photo — up to 10. Leave a row's fields blank to keep a styled placeholder
+        there instead; a photo is always optional (skip it and a placeholder is
+        used). Avoid disease-cure claims.
+      </p>
+      <div id="ingredientRows">
+        <div class="content-row row g-2 mb-2 align-items-center">
+          <div class="col-md-3"><input type="text" class="form-control" name="ingredient_name_1" placeholder="Ingredient name, e.g. Turmeric Root Extract"></div>
+          <div class="col-md-6"><input type="text" class="form-control" name="ingredient_desc_1" placeholder="Real, factual description, e.g. Included for its traditional role in supporting joint comfort"></div>
+          <div class="col-md-3"><input type="file" class="form-control form-control-sm" name="image_ingredient-1" accept="image/*"><span class="text-muted small">Photo (optional)</span></div>
+        </div>
+        <div class="content-row row g-2 mb-2 align-items-center">
+          <div class="col-md-3"><input type="text" class="form-control" name="ingredient_name_2" placeholder="Ingredient name"></div>
+          <div class="col-md-6"><input type="text" class="form-control" name="ingredient_desc_2" placeholder="Real, factual description"></div>
+          <div class="col-md-3"><input type="file" class="form-control form-control-sm" name="image_ingredient-2" accept="image/*"><span class="text-muted small">Photo (optional)</span></div>
+        </div>
+        <div class="content-row row g-2 mb-2 align-items-center">
+          <div class="col-md-3"><input type="text" class="form-control" name="ingredient_name_3" placeholder="Ingredient name"></div>
+          <div class="col-md-6"><input type="text" class="form-control" name="ingredient_desc_3" placeholder="Real, factual description"></div>
+          <div class="col-md-3"><input type="file" class="form-control form-control-sm" name="image_ingredient-3" accept="image/*"><span class="text-muted small">Photo (optional)</span></div>
+        </div>
+        <div class="content-row row g-2 mb-2 align-items-center">
+          <div class="col-md-3"><input type="text" class="form-control" name="ingredient_name_4" placeholder="Ingredient name"></div>
+          <div class="col-md-6"><input type="text" class="form-control" name="ingredient_desc_4" placeholder="Real, factual description"></div>
+          <div class="col-md-3"><input type="file" class="form-control form-control-sm" name="image_ingredient-4" accept="image/*"><span class="text-muted small">Photo (optional)</span></div>
+        </div>
+      </div>
+      <div id="extraIngredientRows" class="d-none"></div>
+      <button type="button" class="btn btn-sm btn-outline-secondary" id="addIngredientBtn">
+        <i class="bi bi-plus-lg"></i> Add another (up to 10)
+      </button>
+    </div>
+
+    <!-- Step 14: Real testimonial content -->
+    <div class="step" data-step="14">
+      <h2>Customer testimonials</h2>
+      <p class="text-muted">
+        Enter real, verified quotes from actual customers (with their permission) —
+        this replaces the "Replace with a real, verified testimonial" placeholders.
+        Shown in a 3-column grid. Leave rows blank to keep placeholders.
+      </p>
+      <div id="testimonialRows">
+        <div class="testimonial-row border rounded-3 p-3 mb-3">
+          <textarea class="form-control mb-2" name="testimonial_quote_1" rows="2" placeholder="Real customer quote"></textarea>
+          <div class="row g-2">
+            <div class="col-6"><input type="text" class="form-control" name="testimonial_name_1" placeholder="Real name (with permission)"></div>
+            <div class="col-6"><input type="text" class="form-control" name="testimonial_role_1" placeholder="Role / location (optional)"></div>
+          </div>
+        </div>
+        <div class="testimonial-row border rounded-3 p-3 mb-3">
+          <textarea class="form-control mb-2" name="testimonial_quote_2" rows="2" placeholder="Real customer quote"></textarea>
+          <div class="row g-2">
+            <div class="col-6"><input type="text" class="form-control" name="testimonial_name_2" placeholder="Real name (with permission)"></div>
+            <div class="col-6"><input type="text" class="form-control" name="testimonial_role_2" placeholder="Role / location (optional)"></div>
+          </div>
+        </div>
+        <div class="testimonial-row border rounded-3 p-3 mb-3">
+          <textarea class="form-control mb-2" name="testimonial_quote_3" rows="2" placeholder="Real customer quote"></textarea>
+          <div class="row g-2">
+            <div class="col-6"><input type="text" class="form-control" name="testimonial_name_3" placeholder="Real name (with permission)"></div>
+            <div class="col-6"><input type="text" class="form-control" name="testimonial_role_3" placeholder="Role / location (optional)"></div>
+          </div>
+        </div>
+      </div>
+      <div id="extraTestimonialRows" class="d-none"></div>
+      <button type="button" class="btn btn-sm btn-outline-secondary" id="addTestimonialBtn">
+        <i class="bi bi-plus-lg"></i> Add another (up to 6)
+      </button>
+    </div>
+
+    <!-- Step 15: Section picker -->
+    <div class="step" data-step="15">
+      <h2>Choose your sections</h2>
+      <p class="text-muted">Pick which sections to include, in addition to the mandatory Banner and final Call-to-Action. Use the arrows on each card to set your own order.</p>
+      <div class="row g-2" id="sectionPickerList">
+        <!-- populated by JS from /api/sections -->
+      </div>
+      <div class="d-flex flex-wrap align-items-center gap-3 mt-3">
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="selectAllSections">Select all</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="selectDefaultSections">Reset to recommended</button>
+        <div class="form-check form-switch ms-md-auto mb-0">
+          <input class="form-check-input" type="checkbox" name="randomize_section_order" value="true" id="randomizeSectionOrder" checked>
+          <label class="form-check-label small" for="randomizeSectionOrder">
+            Randomize order automatically each generation
+          </label>
+        </div>
+      </div>
+      <p class="text-muted small mt-2">
+        Randomize is on by default so every generated site has a different structure.
+        Using the up/down arrows to reorder a card turns this off, so your exact order is used instead.
+      </p>
+    </div>
+
+    <!-- Step 16: Reference sites -->
+    <div class="step" data-step="16">
+      <h2>Reference sites <span class="text-muted fw-normal">(optional)</span></h2>
+      <p class="text-muted">
+        Paste competitor or inspiration URLs, one per line. We'll save a private
+        <code>competitive-notes.md</code> file with each URL (and its page title/meta
+        description where fetchable) into your download — for your own research.
+        <strong>We never copy competitor page content into your generated site.</strong>
+      </p>
+      <textarea class="form-control" name="reference_sites" rows="5" placeholder="https://competitor-one.com&#10;https://competitor-two.com" id="referenceSitesInput"></textarea>
+      <button type="button" class="btn btn-sm btn-outline-secondary mt-2" id="suggestColorsBtn">
+        <i class="bi bi-palette"></i> Suggest a primary color from the first URL above
+      </button>
+      <p class="text-muted small mt-1" id="suggestColorsNote"></p>
+    </div>
+
+    <!-- Step 17: Pages & technical SEO preview -->
+    <div class="step" data-step="17">
+      <h2>Theme editor</h2>
+      <p class="text-muted">Edit the selected custom theme before generating. Leave fields blank to use generated copy.</p>
+      <div id="themeEditor" class="theme-editor mb-4">
+        <div class="theme-editor-note">For default generator, this editor is ignored. Theme images are replaced from Step 12 uploads.</div>
+        <div class="theme-live-grid">
+          <div class="theme-section-nav" id="themeSectionNav">
+            <button type="button" data-editor-section="header"><i class="bi bi-menu-button-wide"></i> Header</button>
+            <button type="button" class="active" data-editor-section="hero"><i class="bi bi-stars"></i> Hero</button>
+            <button type="button" data-editor-section="about"><i class="bi bi-info-circle"></i> About</button>
+            <button type="button" data-editor-section="benefits"><i class="bi bi-check2-circle"></i> Benefits</button>
+            <button type="button" data-editor-section="ingredients"><i class="bi bi-list-check"></i> Ingredients</button>
+            <button type="button" data-editor-section="proof"><i class="bi bi-chat-quote"></i> Proof</button>
+            <button type="button" data-editor-section="images"><i class="bi bi-images"></i> Images</button>
+            <button type="button" data-editor-section="faq"><i class="bi bi-question-circle"></i> FAQ</button>
+            <button type="button" data-editor-section="finish"><i class="bi bi-flag"></i> Finish</button>
+          </div>
+          <div class="theme-controls">
+            <div class="row g-3 mt-1">
+              <div class="col-12 theme-control-group" data-editor-panel="header">
+                <h4>Header</h4>
+                <label class="form-label small">Brand text</label><input class="form-control mb-2" name="theme_header_brand">
+                <label class="form-label small">Nav item 1</label><input class="form-control mb-2" name="theme_header_nav_1">
+                <label class="form-label small">Nav item 2</label><input class="form-control mb-2" name="theme_header_nav_2">
+                <label class="form-label small">Nav item 3</label><input class="form-control mb-2" name="theme_header_nav_3">
+                <label class="form-label small">Nav item 4</label><input class="form-control mb-2" name="theme_header_nav_4">
+                <label class="form-label small">Header CTA</label><input class="form-control" name="theme_header_cta">
+              </div>
+              <div class="col-12 theme-control-group active" data-editor-panel="hero">
+                <h4>Hero</h4>
+                <label class="form-label small">Hero title</label><input class="form-control mb-2" name="theme_hero_title">
+                <label class="form-label small">Hero body</label><textarea class="form-control" name="theme_hero_body" rows="3" placeholder="Use blank lines between paragraphs."></textarea>
+              </div>
+              <div class="col-12 theme-control-group" data-editor-panel="about">
+                <h4>About</h4>
+                <label class="form-label small">What-is title</label><input class="form-control mb-2" name="theme_what_title">
+                <label class="form-label small">What-is body</label><textarea class="form-control mb-2" name="theme_what_body" rows="3"></textarea>
+                <label class="form-label small">How-it-works title</label><input class="form-control mb-2" name="theme_how_title">
+                <label class="form-label small">How-it-works body</label><textarea class="form-control" name="theme_how_body" rows="3"></textarea>
+              </div>
+              <div class="col-12 theme-control-group" data-editor-panel="benefits">
+                <h4>Benefits</h4>
+                <label class="form-label small">Benefits title</label><input class="form-control mb-2" name="theme_benefits_title">
+                <label class="form-label small">Benefits intro/body</label><textarea class="form-control mb-2" name="theme_benefits_body" rows="3"></textarea>
+                <label class="form-label small">Usage title</label><input class="form-control mb-2" name="theme_usage_title">
+                <label class="form-label small">Usage body</label><textarea class="form-control" name="theme_usage_body" rows="3"></textarea>
+              </div>
+              <div class="col-12 theme-control-group" data-editor-panel="ingredients">
+                <h4>Ingredients</h4>
+                <label class="form-label small">Ingredients title</label><input class="form-control mb-2" name="theme_ingredients_title">
+                <label class="form-label small">Ingredients intro/body</label><textarea class="form-control" name="theme_ingredients_body" rows="3"></textarea>
+              </div>
+              <div class="col-12 theme-control-group" data-editor-panel="proof">
+                <h4>Proof, guarantee, and buy section</h4>
+                <label class="form-label small">Guarantee title</label><input class="form-control mb-2" name="theme_guarantee_title">
+                <label class="form-label small">Guarantee body</label><textarea class="form-control mb-2" name="theme_guarantee_body" rows="3"></textarea>
+                <label class="form-label small">Where-to-buy title</label><input class="form-control mb-2" name="theme_where_title">
+                <label class="form-label small">Where-to-buy body</label><textarea class="form-control" name="theme_where_body" rows="3"></textarea>
+              </div>
+              <div class="col-12 theme-control-group" data-editor-panel="images">
+                <h4>Theme images</h4>
+                <div class="theme-image-fields">
+                  <label>Hero image<input type="file" class="form-control form-control-sm" name="image_hero" accept="image/*"></label>
+                  <label>Main product image<input type="file" class="form-control form-control-sm" name="image_product-main" accept="image/*"></label>
+                  <label>Pricing composite<input type="file" class="form-control form-control-sm" name="image_pricing" accept="image/*"></label>
+                  <label>Final offer product image<input type="file" class="form-control form-control-sm" name="image_product-package-3" accept="image/*"></label>
+                  <label>Customer photo 1<input type="file" class="form-control form-control-sm" name="image_customer-review-1" accept="image/*"></label>
+                  <label>Customer photo 2<input type="file" class="form-control form-control-sm" name="image_customer-review-2" accept="image/*"></label>
+                  <label>Customer photo 3<input type="file" class="form-control form-control-sm" name="image_customer-review-3" accept="image/*"></label>
+                  <label>Guarantee image<input type="file" class="form-control form-control-sm" name="image_guarantee" accept="image/*"></label>
+                  <label>Certification image<input type="file" class="form-control form-control-sm" name="image_certified" accept="image/*"></label>
+                  <label>Free shipping image<input type="file" class="form-control form-control-sm" name="image_free-shipping" accept="image/*"></label>
+                  <label>Checkout preview<input type="file" class="form-control form-control-sm" name="image_checkout-page" accept="image/*"></label>
+                  <label>Bonus image 1<input type="file" class="form-control form-control-sm" name="image_bonus-1" accept="image/*"></label>
+                  <label>Bonus image 2<input type="file" class="form-control form-control-sm" name="image_bonus-2" accept="image/*"></label>
+                  <label>Bonus image 3<input type="file" class="form-control form-control-sm" name="image_bonus-3" accept="image/*"></label>
+                </div>
+              </div>
+              <div class="col-12 theme-control-group" data-editor-panel="faq">
+                <h4>FAQ</h4>
+                <div class="row g-2">
+                  <div class="col-md-6"><input class="form-control" name="theme_faq_q_1" placeholder="FAQ question 1"></div><div class="col-md-6"><input class="form-control" name="theme_faq_a_1" placeholder="FAQ answer 1"></div>
+                  <div class="col-md-6"><input class="form-control" name="theme_faq_q_2" placeholder="FAQ question 2"></div><div class="col-md-6"><input class="form-control" name="theme_faq_a_2" placeholder="FAQ answer 2"></div>
+                  <div class="col-md-6"><input class="form-control" name="theme_faq_q_3" placeholder="FAQ question 3"></div><div class="col-md-6"><input class="form-control" name="theme_faq_a_3" placeholder="FAQ answer 3"></div>
+                  <div class="col-md-6"><input class="form-control" name="theme_faq_q_4" placeholder="FAQ question 4"></div><div class="col-md-6"><input class="form-control" name="theme_faq_a_4" placeholder="FAQ answer 4"></div>
+                  <div class="col-md-6"><input class="form-control" name="theme_faq_q_5" placeholder="FAQ question 5"></div><div class="col-md-6"><input class="form-control" name="theme_faq_a_5" placeholder="FAQ answer 5"></div>
+                  <div class="col-md-6"><input class="form-control" name="theme_faq_q_6" placeholder="FAQ question 6"></div><div class="col-md-6"><input class="form-control" name="theme_faq_a_6" placeholder="FAQ answer 6"></div>
+                </div>
+              </div>
+              <div class="col-12 theme-control-group" data-editor-panel="finish">
+                <h4>Finish</h4>
+                <label class="form-label small">Next-step title</label><input class="form-control mb-2" name="theme_post_purchase_title">
+                <label class="form-label small">Next-step body</label><textarea class="form-control mb-2" name="theme_post_purchase_body" rows="3"></textarea>
+                <label class="form-label small">Conclusion title</label><input class="form-control mb-2" name="theme_conclusion_title">
+                <label class="form-label small">Conclusion body</label><textarea class="form-control mb-2" name="theme_conclusion_body" rows="3"></textarea>
+                <label class="form-label small">Footer heading</label><input class="form-control mb-2" name="theme_footer_title">
+                <label class="form-label small">Copyright line</label><input class="form-control" name="theme_footer_copyright">
+              </div>
+            </div>
+          </div>
+          <div class="theme-preview-wrap">
+            <div class="theme-preview-toolbar">
+              <span>Live preview</span>
+              <div class="preview-device-toggle" id="previewDeviceToggle">
+                <button type="button" class="active" data-preview-size="desktop"><i class="bi bi-display"></i></button>
+                <button type="button" data-preview-size="tablet"><i class="bi bi-tablet"></i></button>
+                <button type="button" data-preview-size="mobile"><i class="bi bi-phone"></i></button>
+                <button type="button" id="themePreviewTop"><i class="bi bi-arrow-up"></i></button>
+              </div>
+            </div>
+            <div class="theme-preview" id="themeLivePreview">
+              <nav class="tpl-nav">
+                <strong id="previewNavBrand">MITOLYN</strong>
+                <span id="previewNavAbout">About Mitolyn</span>
+                <span id="previewNavBenefits">Benefits</span>
+                <span id="previewNavPricing">Pricing</span>
+                <span id="previewNavFaq">FAQ</span>
+                <button id="previewNavCta">ORDER NOW</button>
+              </nav>
+              <section class="tpl-hero">
+                <div class="tpl-image"><img id="previewHeroImage" alt=""></div>
+                <div><h1 id="previewHeroTitle"></h1><div id="previewHeroBody"></div><button id="previewCta"></button></div>
+              </section>
+              <section class="tpl-two-col">
+                <div><h2 id="previewWhatTitle"></h2><div id="previewWhatBody"></div></div>
+                <img id="previewMainImage" alt="">
+              </section>
+              <section class="tpl-band"><h2 id="previewHowTitle"></h2></section>
+              <section class="tpl-section"><div id="previewHowBody"></div></section>
+              <section class="tpl-band"><h2 id="previewPricingTitle"></h2><p id="previewPricingSubtitle"></p></section>
+              <section class="tpl-gray"><img id="previewPricingImage" alt=""></section>
+              <section class="tpl-band"><h2>What Our Customers Are Saying?</h2></section>
+              <section class="tpl-reviews">
+                <div><img id="previewCustomer1" alt=""><h3>Verified Customer</h3><p>Replace with a real, verified customer testimonial.</p><button>Verified Customer</button></div>
+                <div><img id="previewCustomer2" alt=""><h3>Verified Customer</h3><p>Replace with a real, verified customer testimonial.</p><button>Verified Customer</button></div>
+                <div><img id="previewCustomer3" alt=""><h3>Verified Customer</h3><p>Replace with a real, verified customer testimonial.</p><button>Verified Customer</button></div>
+              </section>
+              <section class="tpl-pink-card">
+                <div><h2 id="previewGuaranteeTitle"></h2><div id="previewGuaranteeBody"></div><button>BUY NOW</button></div>
+                <img id="previewGuaranteeImage" alt="">
+              </section>
+              <section class="tpl-dark-strip"><img id="previewCertifiedImage" alt=""></section>
+              <section class="tpl-section"><h2 id="previewBenefitsTitle"></h2><div id="previewBenefitsBody"></div></section>
+              <section class="tpl-band"><h2 id="previewSecondPricingTitle"></h2></section>
+              <section class="tpl-gray"><img id="previewPricingImage2" alt=""></section>
+              <section class="tpl-band"><h2 id="previewIngredientsTitle"></h2></section>
+              <section class="tpl-section"><div id="previewIngredientsBody"></div></section>
+              <section class="tpl-band"><h2>Choose Your Savings Package</h2></section>
+              <section class="tpl-section"><p>Pick the package that fits your goals and enjoy exclusive discounts, free shipping, and a risk-free 60-day guarantee.</p><ul><li>Basic Package</li><li>Premium Package - Best Value</li><li>Standard Package</li></ul></section>
+              <section class="tpl-band"><h2 id="previewProsTitle"></h2></section>
+              <section class="tpl-section"><p>Pros and considerations are generated from your product details.</p></section>
+              <section class="tpl-band"><h2 id="previewUsageTitle"></h2></section>
+              <section class="tpl-section"><div id="previewUsageBody"></div></section>
+              <section class="tpl-band"><h2 id="previewWhereTitle"></h2></section>
+              <section class="tpl-section"><div id="previewWhereBody"></div><button>BUY NOW</button></section>
+              <section class="tpl-pink-card">
+                <img id="previewShippingImage" alt="">
+                <div><h2 id="previewNextTitle"></h2><div id="previewNextBody"></div></div>
+              </section>
+              <section class="tpl-band"><h2>What Happens After I Click the "Buy Now" Button?</h2></section>
+              <section class="tpl-section text-center"><img id="previewCheckoutImage" alt=""><div id="previewCheckoutBody"></div><button>BUY NOW</button></section>
+              <section class="tpl-band"><h2 id="previewFaqTitle">Frequently Asked Questions</h2></section>
+              <section class="tpl-faq" id="previewFaqList"></section>
+              <section class="tpl-band"><h2 id="previewFinalOfferTitle"></h2></section>
+              <section class="tpl-section text-center"><img id="previewFinalProductImage" alt=""><p><strong>Regular Price:</strong> <del>$99/Pouch</del></p><p><strong>Today Just For:</strong> <span id="previewFinalPrice">$49/Pouch</span></p><button>BUY NOW</button></section>
+              <footer class="tpl-footer"><h2 id="previewFooterTitle"></h2><h3 id="previewConclusionTitle"></h3><div id="previewConclusionBody"></div><p id="previewFooterCopyright"></p></footer>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2>Pages &amp; technical SEO</h2>
+      <p class="text-muted">These are generated automatically — no input needed here.</p>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <h4 class="small text-uppercase text-muted fw-bold">Pages</h4>
+          <ul class="check-list" id="pagesList"></ul>
+        </div>
+        <div class="col-md-6">
+          <h4 class="small text-uppercase text-muted fw-bold">Technical SEO</h4>
+          <ul class="check-list">
+            <li><i class="bi bi-check-circle-fill"></i> Meta title, description, keywords, canonical</li>
+            <li><i class="bi bi-check-circle-fill"></i> Open Graph + Twitter Card tags</li>
+            <li><i class="bi bi-check-circle-fill"></i> JSON-LD schema (Organization, Website, Product/Course/Service, FAQ, Breadcrumb)</li>
+            <li><i class="bi bi-check-circle-fill"></i> Single H1, structured H2/H3 hierarchy</li>
+            <li><i class="bi bi-check-circle-fill"></i> Image ALT + TITLE on every image</li>
+            <li><i class="bi bi-check-circle-fill"></i> sitemap.xml + robots.txt</li>
+            <li><i class="bi bi-check-circle-fill"></i> .htaccess (HTTPS redirect, caching, gzip)</li>
+            <li><i class="bi bi-check-circle-fill"></i> llms.txt (AI-crawler summary)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 18: Review & Generate -->
+    <div class="step" data-step="18">
+      <h2>Review &amp; generate</h2>
+      <p class="text-muted">Confirm your details, then generate and download your site as a .zip.</p>
+      <div id="reviewSummary" class="review-box"></div>
+      <div class="form-check mt-3">
+        <input class="form-check-input" type="checkbox" name="use_ai_content" value="true" id="useAi">
+        <label class="form-check-label" for="useAi">
+          Rewrite copy with AI for fully unique wording
+        </label>
+      </div>
+      <div id="aiConfiguredNote" class="ai-status-note d-none mt-2">
+        <i class="bi bi-check-circle-fill text-success"></i>
+        A server-configured API key was found (via <code>.env</code>) — you don't need to
+        paste one below. <a href="#" id="useDifferentKeyLink">Use a different key for this generation instead</a>.
+      </div>
+      <div id="apiKeyBlock" class="mt-3 d-none">
+        <label class="form-label small">AI provider</label>
+        <select class="form-select mb-2" name="ai_provider" id="aiProviderSelect">
+          <option value="openai">OpenAI / ChatGPT</option>
+          <option value="anthropic">Anthropic / Claude</option>
+        </select>
+        <label class="form-label small" id="apiKeyLabel">OpenAI API key</label>
+        <div class="input-group">
+          <input type="password" class="form-control" name="openai_api_key" id="apiKeyInput" placeholder="sk-...">
+          <button class="btn btn-outline-secondary" type="button" id="toggleApiKey"><i class="bi bi-eye"></i></button>
+        </div>
+        <input type="password" class="d-none" name="anthropic_api_key" id="anthropicApiKeyInput" placeholder="sk-ant-...">
+        <p class="text-muted small mt-1">
+          Used only for this generation, sent directly to your local server, and never
+          saved to disk or included in your downloaded .zip.
+          <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener" id="apiKeyHelpLink">Get a key</a>.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="d-flex justify-content-between mt-4">
+    <button type="button" class="btn btn-outline-secondary" id="backBtn">Back</button>
+    <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
+    <button type="submit" class="btn btn-primary d-none" id="generateBtn">
+      <i class="bi bi-download"></i> Generate &amp; Download ZIP
+    </button>
+  </div>
+  </form>
+
+  <div id="statusBox" class="status-box mt-4 d-none"></div>
+</div>
+
+<script src="wizard.js"></script>
+</body>
+</html>

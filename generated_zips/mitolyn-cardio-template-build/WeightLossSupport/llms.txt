@@ -1,0 +1,15 @@
+# Mitolyn
+
+> Mitolyn — Weight Loss Support. Primary focus: Mitolyn supplement.
+
+## About
+Mitolyn is a supplement landing page covering weight loss support. Business contact: support@example.com.
+
+## Page Sections
+
+
+## Key Pages
+- [Home](https://example.com/)
+- [Privacy Policy](https://example.com/privacy-policy.html)
+- [Terms & Conditions](https://example.com/terms-and-conditions.html)
+- [Contact](https://example.com/contact.html)

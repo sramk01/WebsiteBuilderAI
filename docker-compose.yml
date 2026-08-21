@@ -1,0 +1,11 @@
+services:
+  webgen:
+    build: .
+    container_name: websitebuilderai-webgen
+    restart: unless-stopped
+
+    ports:
+      - "127.0.0.1:17000:8000"
+
+    env_file:
+      - .env

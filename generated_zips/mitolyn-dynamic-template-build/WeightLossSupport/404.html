@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>404 Page</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/mystyle.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .main_body {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: #000;
+      }
+
+      .main_body h1 {
+        font-size: 200px;
+        color: white;
+        letter-spacing: 5px;
+        font-weight: 800;
+        text-shadow: 10px 9px 3px #74b9ff;
+        transition: all 1s linear;
+      }
+
+      .main_body h2 {
+        color: white;
+        font-size: 30px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .main_body p {
+        color: white;
+        font-weight: 500;
+        text-align: center;
+        margin: 20px auto;
+      }
+
+      .main_body a {
+        font-size: 15px;
+        text-decoration: none;
+        text-transform: uppercase;
+        display: inline-block;
+        color: #eaeaea;
+        background: #000;
+        font-weight: 700;
+        padding: 15px 30px;
+        box-shadow: 5px 4px 15px -5px #0046d5;
+        border-radius: 40px;
+        transition: all 0.5s linear;
+      }
+
+      .main_body:hover h1 {
+        text-shadow: 9px 6px 3px #b2bec3;
+      }
+
+      .main_body:hover a {
+        color: #000;
+        background: #eaeaea;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="main_body">
+      <h1>404</h1>
+      <h2>PAGE NOT FOUND</h2>
+      <p>This is not a fault, just an accident that was not intentional.</p>
+      <a href="https://mitolyn.example.com"> Go to homepage</a>
+    </section>
+  </body>
+</html>

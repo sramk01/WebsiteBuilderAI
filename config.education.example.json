@@ -1,0 +1,32 @@
+{
+  "site_type": "education",
+  "product_name": "DataCraft Academy",
+  "category": "Data Analytics",
+  "official_website": "https://example.com/datacraft-academy",
+  "affiliate_link": "https://example.com/datacraft-academy/enroll",
+  "primary_keyword": "data analytics course",
+  "secondary_keywords": [
+    "learn data analytics online",
+    "beginner data analyst course",
+    "excel to python data course"
+  ],
+  "brand_colors": {
+    "primary": "#2E5EAA",
+    "secondary": "#F4A63E",
+    "dark": "#132A4F",
+    "light": "#F0F4FB"
+  },
+  "domain": "https://www.your-domain-here.com",
+  "business_name": "DataCraft Academy",
+  "contact_email": "support@your-domain-here.com",
+  "price": {
+    "one_bottle": "199",
+    "three_bottle_each": "399",
+    "six_bottle_each": "899",
+    "currency": "USD"
+  },
+  "rating": {
+    "value": "4.9",
+    "count": "5210"
+  }
+}

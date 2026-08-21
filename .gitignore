@@ -1,0 +1,18 @@
+# Never commit your real API key
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Generated output (local test runs)
+Products/
+*.zip
+
+# OS/editor cruft
+.DS_Store
+.vscode/
+.idea/

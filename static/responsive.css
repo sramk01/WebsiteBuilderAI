@@ -1,0 +1,33 @@
+/* Mobile first base styles live in style.css.
+   These are progressive enhancements for larger screens, plus a
+   few explicit small-phone refinements below. */
+
+/* Small phones (<576px) */
+@media (max-width: 575px) {
+  section { padding: 2.75rem 0; }
+  .hero-section { padding-top: 2rem; padding-bottom: 2.5rem; }
+  h1 { font-size: 1.85rem; }
+  .stat-number { font-size: 1.5rem; }
+  .stat-label { font-size: .75rem; }
+  .trust-badges { gap: .5rem 1rem; }
+  .btn-lg { width: 100%; }
+  .hero-section .btn-lg { width: auto; }
+  .pricing-card { padding: 1.75rem 1.25rem; }
+  .type-card { padding: 1.1rem; }
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+  h2 { font-size: 2.25rem; }
+}
+
+/* Laptops */
+@media (min-width: 992px) {
+  .hero-section { padding: 4rem 0; }
+  h2 { font-size: 2.5rem; }
+}
+
+/* Desktops */
+@media (min-width: 1200px) {
+  .container { max-width: 1140px; }
+}

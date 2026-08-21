@@ -1,0 +1,32 @@
+{
+  "site_type": "product",
+  "product_name": "FlowTrack",
+  "category": "Project Management Software",
+  "official_website": "https://example.com/flowtrack",
+  "affiliate_link": "https://example.com/flowtrack/signup",
+  "primary_keyword": "project management software",
+  "secondary_keywords": [
+    "task management tool for teams",
+    "kanban software online",
+    "project tracking app"
+  ],
+  "brand_colors": {
+    "primary": "#6D28D9",
+    "secondary": "#F59E0B",
+    "dark": "#241242",
+    "light": "#F5F3FF"
+  },
+  "domain": "https://www.your-domain-here.com",
+  "business_name": "FlowTrack Inc.",
+  "contact_email": "support@your-domain-here.com",
+  "price": {
+    "one_bottle": "12",
+    "three_bottle_each": "29",
+    "six_bottle_each": "79",
+    "currency": "USD"
+  },
+  "rating": {
+    "value": "4.7",
+    "count": "3400"
+  }
+}

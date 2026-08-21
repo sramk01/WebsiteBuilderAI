@@ -1,0 +1,34 @@
+{
+  "site_type": "supplement",
+  "product_name": "VitaJoint Pro",
+  "category": "Joint Support",
+  "official_website": "https://example.com/vitajoint-pro",
+  "affiliate_link": "https://example.com/vitajoint-pro?ref=aff123",
+  "primary_keyword": "joint support supplement",
+  "secondary_keywords": [
+    "natural joint pain relief",
+    "cartilage support formula",
+    "best joint supplement for adults",
+    "flexibility and mobility support"
+  ],
+  "brand_colors": {
+    "primary": "#1F6F54",
+    "secondary": "#F4A63E",
+    "dark": "#123328",
+    "light": "#FBF7EE"
+  },
+  "domain": "https://www.your-domain-here.com",
+  "business_name": "VitaJoint Pro",
+  "contact_email": "support@your-domain-here.com",
+  "price": {
+    "one_bottle": "69",
+    "three_bottle_each": "59",
+    "six_bottle_each": "49",
+    "currency": "USD"
+  },
+  "rating": {
+    "value": "4.8",
+    "count": "2143"
+  },
+  "use_ai_content": false
+}
